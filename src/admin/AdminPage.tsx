@@ -9,6 +9,7 @@ import SkillsPanel from './SkillsPanel';
 import SettingsPanel from './SettingsPanel';
 import { ADMIN_EMAIL } from '../config';
 import { backend, copySampleDataToDatabase } from '../lib/store';
+import { HOME_URL } from '../lib/paths';
 
 type Tab = 'profile' | 'projects' | 'timeline' | 'skills' | 'settings';
 
@@ -43,7 +44,7 @@ export default function AdminPage() {
             使用 Google 登入
           </button>
           {auth.error && <p className="error-text">{auth.error}</p>}
-          <a className="link-back" href="/">
+          <a className="link-back" href={HOME_URL}>
             ← 回到網站首頁
           </a>
         </div>
@@ -64,7 +65,7 @@ export default function AdminPage() {
           <button className="btn" onClick={() => void auth.logout()}>
             登出
           </button>
-          <a className="link-back" href="/">
+          <a className="link-back" href={HOME_URL}>
             ← 回到網站首頁
           </a>
         </div>
@@ -115,7 +116,7 @@ export default function AdminPage() {
             </p>
           </div>
           <div className="admin-header-actions">
-            <a className="btn btn-ghost" href="/">
+            <a className="btn btn-ghost" href={HOME_URL}>
               查看網站
             </a>
             {!localMode && (

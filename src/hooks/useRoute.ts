@@ -7,6 +7,7 @@
  *   https://你的網站/#/admin
  */
 import { useEffect, useState } from 'react';
+import { ADMIN_URL, HOME_URL } from '../lib/paths';
 
 export type Route = 'home' | 'admin';
 
@@ -31,7 +32,7 @@ export function useRoute(): [Route, (route: Route) => void] {
   }, []);
 
   function navigate(next: Route) {
-    const url = next === 'admin' ? '/admin' : '/';
+    const url = next === 'admin' ? ADMIN_URL : HOME_URL;
     try {
       window.history.pushState({}, '', url);
     } catch {

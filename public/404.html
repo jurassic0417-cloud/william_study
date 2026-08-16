@@ -2,18 +2,43 @@
 <html lang="zh-Hant">
   <head>
     <meta charset="UTF-8" />
-    <title>載入中…</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>找不到頁面</title>
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fbfaf8;
+        color: #24303a;
+        font-family: 'Noto Sans TC', -apple-system, 'Segoe UI', sans-serif;
+        text-align: center;
+        padding: 24px;
+      }
+      a {
+        color: #3d6b8c;
+      }
+    </style>
     <script>
-      // 保險機制：如果部署平台沒有幫 /admin 做 SPA fallback，
-      // 這一頁會把網址轉成 /#/admin，讓後台一樣可以打開。
+      // 有些靜態主機（例如 GitHub Pages）不會把 /admin 這種網址交給 React 處理，
+      // 而是直接回傳這一頁。這裡把它轉成 #/admin，後台一樣打得開。
       (function () {
-        var path = window.location.pathname.replace(/\/+$/, '');
-        var target = path.endsWith('/admin') ? '/#/admin' : '/';
-        window.location.replace(target);
+        var parts = window.location.pathname.split('/').filter(Boolean);
+        if (parts[parts.length - 1] === 'admin') {
+          parts.pop();
+          var base = parts.length ? '/' + parts.join('/') + '/' : '/';
+          window.location.replace(base + '#/admin');
+        }
       })();
     </script>
   </head>
   <body>
-    <p>載入中…</p>
+    <div>
+      <h1>找不到這個頁面</h1>
+      <p>網址可能打錯了。</p>
+      <p><a href="./">← 回到網站首頁</a></p>
+    </div>
   </body>
 </html>

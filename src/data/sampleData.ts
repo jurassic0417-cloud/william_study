@@ -4,6 +4,7 @@
  */
 import type { Profile, Project, Skill, TimelineItem } from '../types';
 import { DEFAULT_ACCENT } from '../config';
+import { HOME_URL } from '../lib/paths';
 
 export const sampleProfile: Profile = {
   name: '楊博勛',
@@ -18,7 +19,7 @@ export const sampleProfile: Profile = {
   learning: '正在學 Python、網頁前端（React），以及怎麼用 AI 工具幫自己加速學習。',
   future: '希望完成一個能真正被同學使用的校園小工具，並挑戰參加全國性的資訊或機器人競賽。',
   photoId: null,
-  photoUrl: '/profile.jpg',
+  photoUrl: `${HOME_URL}profile.jpg`,
 };
 
 export const sampleProjects: Project[] = [

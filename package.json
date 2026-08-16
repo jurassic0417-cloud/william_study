@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:ghpages": "tsc -b && vite build --mode ghpages",
     "preview": "vite preview",
     "start": "vite preview --host 0.0.0.0 --port 3000"
   },
