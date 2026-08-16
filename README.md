@@ -86,7 +86,50 @@ Firebase Console → Firestore Database → **規則**，
 
 ---
 
-## 三、在 Google AI Studio 發布
+## 三、GitHub Pages（已經幫你設定好）
+
+網站已經上線：
+
+- 公開網站：<https://jurassic0417-cloud.github.io/william_study/>
+- 管理後台：<https://jurassic0417-cloud.github.io/william_study/admin>
+
+以後只要把改動 push 上去，網站就會自動重新部署：
+
+```bash
+git add -A
+git commit -m "說明你改了什麼"
+git push
+```
+
+推上去之後大約等 1～2 分鐘，重新整理網頁就會看到新版本。
+
+### 讓線上版連到 Firebase
+
+GitHub Actions 打包時看不到你電腦裡的 `.env.local`，所以要把 Firebase 設定存成 GitHub Secrets：
+
+GitHub repo → Settings → Secrets and variables → Actions → New repository secret，
+把這六個分別加進去（名字要一模一樣）：
+
+```
+VITE_FIREBASE_API_KEY
+VITE_FIREBASE_AUTH_DOMAIN
+VITE_FIREBASE_PROJECT_ID
+VITE_FIREBASE_STORAGE_BUCKET
+VITE_FIREBASE_MESSAGING_SENDER_ID
+VITE_FIREBASE_APP_ID
+```
+
+加完之後再 push 一次（或到 Actions 頁面按 Re-run），線上版就會連到 Firestore。
+
+別忘了到 Firebase Console → Authentication → Settings → 授權網域，
+把 `jurassic0417-cloud.github.io` 加進去，Google 登入才不會被擋。
+
+> 小提醒：GitHub Pages 沒有 SPA 轉址功能，所以直接開 `/admin` 時會先經過 `public/404.html`，
+> 再自動跳到 `/#/admin`。網址列會多一個 `#`，功能完全一樣。
+
+---
+
+## 四、在 Google AI Studio 發布
 
 1. 把整個專案匯入 Google AI Studio（或直接在 AI Studio 裡建立）
 2. 如果 AI Studio 問你要不要「Enable Firebase」，可以按下去，
@@ -103,7 +146,7 @@ Firebase Console → Firestore Database → **規則**，
 
 ---
 
-## 四、資料存在哪裡
+## 五、資料存在哪裡
 
 Firestore 的結構刻意做得很簡單：
 
@@ -123,7 +166,7 @@ Firestore 的結構刻意做得很簡單：
 
 ---
 
-## 五、常用檔案在哪裡
+## 六、常用檔案在哪裡
 
 | 想改什麼 | 打開哪個檔案 |
 | --- | --- |
@@ -136,7 +179,7 @@ Firestore 的結構刻意做得很簡單：
 
 ---
 
-## 六、常見問題
+## 七、常見問題
 
 **Q：後台顯示「此帳號沒有網站管理權限。」**
 用的不是 `src/config.ts` 裡設定的那個 Google 帳號，登出換帳號再登入。
