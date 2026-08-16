@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <title>載入中…</title>
+    <script>
+      // 保險機制：如果部署平台沒有幫 /admin 做 SPA fallback，
+      // 這一頁會把網址轉成 /#/admin，讓後台一樣可以打開。
+      (function () {
+        var path = window.location.pathname.replace(/\/+$/, '');
+        var target = path.endsWith('/admin') ? '/#/admin' : '/';
+        window.location.replace(target);
+      })();
+    </script>
+  </head>
+  <body>
+    <p>載入中…</p>
+  </body>
+</html>

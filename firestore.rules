@@ -1,0 +1,52 @@
+rules_version = '2';
+
+// 真正的安全防線在這裡：
+//   任何人都可以「讀」網站內容（因為這是公開的個人網站）
+//   只有管理員的 Google 帳號可以「寫」（新增 / 修改 / 刪除）
+//
+// 換帳號時，記得同時改 src/config.ts 的 ADMIN_EMAIL。
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email.lower() == 'jurassic0417@gmail.com';
+    }
+
+    match /siteProfile/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /settings/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /projects/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /projectImages/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /timeline/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /skills/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // 其他沒有列出的路徑一律禁止
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

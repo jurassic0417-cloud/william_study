@@ -1,0 +1,5 @@
+{
+  "name": "楊博勛的學習歷程網站",
+  "description": "高中生的個人學習歷程與作品集網站，前台公開展示、/admin 後台可用 Google 帳號登入編輯，資料存在 Firebase Firestore。",
+  "requestFramePermissions": []
+}
